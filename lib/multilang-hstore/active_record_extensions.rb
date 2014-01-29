@@ -51,6 +51,7 @@ module Multilang
             end
 
             define_method "#{attribute}_#{locale}=" do |value|
+              send("#{attribute}_will_change!") unless send("#{attribute}_#{locale}") == value
               multilang_translation_keeper(attribute)[locale] = value
             end
 
